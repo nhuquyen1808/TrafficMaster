@@ -1,0 +1,85 @@
+using DG.Tweening;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace DevDuck
+{
+    public class LogicUI : MonoBehaviour
+    {
+        [SerializeField] LogicGame logicGame;
+        public Button hintButton, helicopterButton;
+        public static LogicUI ins;
+        [SerializeField] TextMeshProUGUI hintAmountText, heicopterAmountText, leveltText, movesText, coinText;
+        [Header("Win Lose elements : ")] [SerializeField]
+        public TextMeshProUGUI titleText;
+        public GameObject bubbleHelicopter;
+        [SerializeField] UiWinLose uiWinLose;
+        private void Awake()
+        {
+            ins = this;
+            hintButton.onClick.AddListener(OnClickHintButton);
+            helicopterButton.onClick.AddListener(OnClickHelicopterButton);
+          
+        }
+        private void OnClickHelicopterButton()
+        {
+            logicGame.CallHelicopter();
+        }
+
+        private void OnClickHintButton()
+        {
+            logicGame.Hint();
+        }
+
+        public void ShowWinPopup(int coin)
+        {
+           
+            titleText.text = "YOU WIN";
+            coinText.text = (coin).ToString();
+            AudioManager.instance.PlaySound("Win");
+            uiWinLose.ShowWinPanel();
+        }
+
+        public void ShowLosePopup(LOSETYPE loseType)
+        {
+            titleText.text = "YOU LOSE";
+            coinText.text = "0";
+            AudioManager.instance.PlaySound("Lose");
+            uiWinLose.ShowLosePanel(loseType);
+        }
+
+        public void PerformBubbleHelicopter(bool isShow)
+        {
+            if (isShow) bubbleHelicopter.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack);
+            else bubbleHelicopter.transform.DOScale(0, 0.3f).SetEase(Ease.InBack);
+        }
+
+        public void UpdateHintAmountText(int amount)
+        {
+            hintAmountText.text = amount.ToString();
+            PlayerPrefs.SetInt(PlayerPrefsManager.hintAmount, amount);
+        }
+
+        public void UpdateHelicopterAmountText(int amount)
+        {
+            heicopterAmountText.text = amount.ToString();
+            PlayerPrefs.SetInt(PlayerPrefsManager.helicopterAmount, amount);
+        }
+
+        public void UpdateCoinText(int coin)
+        {
+            coinText.text = coin.ToString();
+        }
+
+        public void SetupLevelText(int level)
+        {
+            leveltText.text = "Level : " + level.ToString();
+        }
+
+        public void UpdateMovesText(int move)
+        {
+            movesText.text = "Moves : " + move.ToString();
+        }
+    }
+}
