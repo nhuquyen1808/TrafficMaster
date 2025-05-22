@@ -10,7 +10,7 @@ namespace DevDuck
 {
     public class UiHome : MonoBehaviour
     {
-        [SerializeField] Button shopButton,playButton;
+        [SerializeField] Button shopButton,playButton,noAdsButton;
         [SerializeField] GameObject shadowShop;
         [SerializeField] CanvasGroup nPopupShop;
         [SerializeField] private GameObject car;
@@ -22,10 +22,17 @@ namespace DevDuck
         [SerializeField] List<GameObject> objectsShowed =  new List<GameObject>();
         int currentLevel ;
         public ScrollRect scrollRectShop;
+        public NoAdsManager noAdsManager;
         private void Awake()
         {
             playButton.onClick.AddListener(OnClickPlayButton);
             shopButton.onClick.AddListener(OnClickShopButton);
+            noAdsButton.onClick.AddListener(OnClickNoAdsButton);
+        }
+
+        private void OnClickNoAdsButton()
+        {
+            noAdsManager.ShowNoAds();
         }
 
         private void Start()

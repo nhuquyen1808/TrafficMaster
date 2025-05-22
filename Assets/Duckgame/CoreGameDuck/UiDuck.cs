@@ -20,9 +20,9 @@ public static class UiDuck
         shadow.gameObject.SetActive(false);
         nPopup.transform.localScale = Vector3.one;
         nPopup.alpha = 1;
-        nPopup.gameObject.SetActive(false);
+     //   nPopup.gameObject.SetActive(false);
         nPopup.DOFade(0, 0.3f).SetEase(Ease.InBack);
-        nPopup.transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack);
+        nPopup.transform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack);
     }
 
     public static void ShowElementsPopup(List<GameObject> elements, float timeWaitingBetweenElements)
