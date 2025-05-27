@@ -171,7 +171,7 @@ public class LogicGame : MonoBehaviour
                         cars[i].transform.position + new Vector3(0, 0.3f, 0),
                         Quaternion.identity);
                     hintPlace.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                    Duck.PlayParticle(hintPlace.GetComponent<ParticleSystem>());
+                     Duck.PlayParticle(hintPlace.GetComponent<ParticleSystem>());
                     break;
                 }
             }

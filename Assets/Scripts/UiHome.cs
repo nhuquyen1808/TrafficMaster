@@ -10,7 +10,7 @@ namespace DevDuck
 {
     public class UiHome : MonoBehaviour
     {
-        [SerializeField] Button shopButton,playButton,noAdsButton;
+        [SerializeField] Button shopButton,playButton,noAdsButton,luckyWheelButton;
         [SerializeField] GameObject shadowShop;
         [SerializeField] CanvasGroup nPopupShop;
         [SerializeField] private GameObject car;
@@ -23,11 +23,20 @@ namespace DevDuck
         int currentLevel ;
         public ScrollRect scrollRectShop;
         public NoAdsManager noAdsManager;
+        [SerializeField] GameObject luckyWheelPanel;
+        
         private void Awake()
         {
             playButton.onClick.AddListener(OnClickPlayButton);
             shopButton.onClick.AddListener(OnClickShopButton);
             noAdsButton.onClick.AddListener(OnClickNoAdsButton);
+            luckyWheelButton.onClick.AddListener(OnClickLuckyWheelButtonClicked);
+        }
+
+        private void OnClickLuckyWheelButtonClicked()
+        {
+            Debug.Log("Show LuckyWheel");
+            luckyWheelPanel.SetActive(true);
         }
 
         private void OnClickNoAdsButton()
@@ -84,6 +93,8 @@ namespace DevDuck
         private void OnClickPlayButton()
         {
             shopButton.gameObject.SetActive(false);
+            luckyWheelButton.gameObject.SetActive(false);
+            noAdsButton.gameObject.SetActive(false);
             car.transform.DOMoveZ(3.5f, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 ManagerScene.ins.LoadScene("SceneGame");
