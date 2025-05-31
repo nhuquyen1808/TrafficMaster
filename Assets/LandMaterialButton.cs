@@ -31,7 +31,7 @@ namespace DevDuck
             equipButton.onClick.AddListener(OnClickEquipButton);
         }
 
-        private void OnClickEquipButton()
+        protected virtual void OnClickEquipButton()
         {
             if (STATE == State.DEFAULT || STATE == State.UNLOCKED || STATE == State.USING)
             {
@@ -67,7 +67,7 @@ namespace DevDuck
             }
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             PlayerPrefs.SetInt("LANDMAT_0", 1);
             int type = PlayerPrefs.GetInt($"LANDMAT_{Id}");

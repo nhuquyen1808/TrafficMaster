@@ -41,7 +41,18 @@ public class LogicGame : MonoBehaviour
         Observer.AddObserver(EventAction.EVENT_GET_COIN_CAR, HandleGetCoinCar);
         Observer.AddObserver(EventAction.EVENT_CAR_TRIGGER, HandleCarTrigger);
         Observer.AddObserver(EventAction.EVENT_CAR_DISABLE, HandleCarDisable);
-        SetData();
+        Observer.AddObserver(EventAction.EVENT_CAR_HIT_REDLIGHT,HandleHitRedLight);
+
+        GlobalData.isInGame = true;
+        movesAmount = 100;
+        //SetData();
+    }
+
+    private void HandleHitRedLight(object obj)
+    {
+        int minusMoveAmount = (int)obj;
+        movesAmount -=  minusMoveAmount;
+        logicUI.UpdateMovesText(movesAmount);
     }
 
     private void OnDestroy()
@@ -50,6 +61,7 @@ public class LogicGame : MonoBehaviour
         Observer.RemoveObserver(EventAction.EVENT_GET_COIN_CAR, HandleGetCoinCar);
         Observer.RemoveObserver(EventAction.EVENT_CAR_TRIGGER, HandleCarTrigger);
         Observer.RemoveObserver(EventAction.EVENT_CAR_DISABLE, HandleCarDisable);
+        Observer.RemoveObserver(EventAction.EVENT_CAR_HIT_REDLIGHT,HandleHitRedLight);
     }
 
     private void SetData()

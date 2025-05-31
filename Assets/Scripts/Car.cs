@@ -41,6 +41,8 @@ public class Car : MonoBehaviour
     public bool isOnRunning;
     private CarDirectionSprite carDirectionSprite;
 
+    public bool isCheckRedLight;
+    
     private void Start()
     {
         startPos = transform.position;
@@ -55,10 +57,10 @@ public class Car : MonoBehaviour
     public void CarMovement()
     {
         isOnRunning = true;
+        isCheckRedLight = true;
         GetListPosition();
         CheckCanClick();
         AudioManager.instance.PlaySound("CarEngine");
-
         if (CheckCanClick() /* && carType == CarType.NORMAL*/)
         {
             LogicGame.instance.carAmount--;
@@ -189,6 +191,8 @@ public class Car : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Car") && isOnRunning)
         {
+            isCheckRedLight = false;
+
             if (carType == CarType.NORMAL)
             {
                 Car carTrigger = col.transform.GetComponent<Car>();
@@ -249,19 +253,20 @@ public class Car : MonoBehaviour
                 Debug.Log("?????");
             }
         }
-
         Pedestrians pedestrians = col.gameObject.GetComponent<Pedestrians>();
         if (pedestrians != null)
         {
             sequenceDummy.Pause();
             sequence.Pause();
             this.transform.DOKill();
-            pedestrians.transform.DOKill();
+           // pedestrians.transform.DOKill();
+           pedestrians.Animator.enabled = false;
             Vector3 dir = (pedestrians.transform.position - transform.position).normalized;
-            pedestrians.GetComponent<Rigidbody>().AddForce(dir * 10, ForceMode.Impulse);
+            pedestrians.GetComponent<Rigidbody>().AddForce(dir * 2, ForceMode.Impulse);
+           // this.GetComponent<Rigidbody>().AddForce(dir * -3, ForceMode.Impulse);
             Debug.Log("hit pedestrian then show lose panel");
+            DOVirtual.DelayedCall(1, (() => LogicUI.ins.ShowLosePopup(LOSETYPE.HUMAND_HITTED)));
         }
-
         TankerTruck tankerTruck = col.gameObject.GetComponent<TankerTruck>();
         if (tankerTruck != null)
         {

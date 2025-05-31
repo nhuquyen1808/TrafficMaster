@@ -21,8 +21,8 @@ namespace DevDuck
         public CanvasGroup nPopup;
 
         [Header("tabs")] public Button IAPButton;
-        public Button landSkinButton;
-        public GameObject IAPTab, landSkinTab;
+        public Button landSkinButton,carSkinShop;
+        public GameObject IAPTab, landSkinTab, carSkinTab;
 
         private void Awake()
         {
@@ -33,6 +33,7 @@ namespace DevDuck
         {
             IAPButton.onClick.AddListener(OnClickIAPButton);
             landSkinButton.onClick.AddListener(OnClickLandSkinButton);
+            carSkinShop.onClick.AddListener(OnClickCarSkinButton);
 
 
             closeShopButton.onClick.AddListener(OnClickCloseShopButton);
@@ -44,6 +45,8 @@ namespace DevDuck
             choice6Button.onClick.AddListener(OnClickChoice6Button);
             choice7Button.onClick.AddListener(OnClickChoice7Button);
         }
+
+       
 
 
         private void OnClickChoice7Button()
@@ -113,15 +116,28 @@ namespace DevDuck
         {
             landSkinTab.SetActive(true);
             IAPTab.SetActive(false);
+            carSkinTab.SetActive(false);
             IAPButton.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
             landSkinButton.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            carSkinShop.GetComponent<Image>().color =  new Color32(154, 154, 154, 255);
         }
         private void OnClickIAPButton()
         {
             landSkinTab.SetActive(false);
             IAPTab.SetActive(true);
+            carSkinTab.SetActive(false);
             landSkinButton.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
             IAPButton.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            carSkinShop.GetComponent<Image>().color =  new Color32(154, 154, 154, 255);
+        }
+        private void OnClickCarSkinButton()
+        {
+            carSkinTab.SetActive(true);
+            landSkinTab.SetActive(false);
+            IAPTab.SetActive(false);
+            IAPButton.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
+            landSkinButton.GetComponent<Image>().color = new Color32(154, 154, 154, 255);
+            carSkinShop.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
     }
 }

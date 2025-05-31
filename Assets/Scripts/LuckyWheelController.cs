@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using DG.Tweening;
+using TMPro;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.UI;
 using Button = UnityEngine.UI.Button;
 
 namespace DevDuck
@@ -19,7 +23,7 @@ namespace DevDuck
         public int id;
         public float weight;
         public PrizeType type;
-        public int amount;
+        public float amount;
         
     }
     public class LuckyWheelController : MonoBehaviour
@@ -31,6 +35,10 @@ namespace DevDuck
        [SerializeField] private GameObject PanelGetPrize;
        [SerializeField] Animator getPrizeAnimator;
        public Button closeButton;
+       [Header(("Panel Get Prize"))] public Image Icon;
+       public TextMeshProUGUI amountPrizeTxt;
+       public Sprite coinSprite,  helicopterSprite, hintSprite;
+       Prize currentPrize;
        private void Awake()
        {
            SpinButton.onClick.AddListener(OnClickSpinButton);
@@ -54,21 +62,38 @@ namespace DevDuck
        {
            PanelGetPrize.SetActive(false);
            Debug.Log("Get x2 prize");
+           SetPrizeGeted(currentPrize, 2);
        }
 
        private void OnClickGetButton()
        {
            Debug.Log("Get prize");
            PanelGetPrize.SetActive(false);
+           SetPrizeGeted(currentPrize, 1);
            //gameObj1.GetComponent<RectTransform>().DOMove(gameObj2.GetComponent<RectTransform>().position, 1.2f).SetEase(Ease.InBack);
        }
 
        private void OnClickSpinButton()
        {
-           var prize = GetPrize();
-           Debug.Log(prize.type +"    " + prize.amount );
-           RotateWheel(prize);
-
+           currentPrize = GetPrize();
+           Debug.Log(currentPrize.type +"    " + currentPrize.amount );
+           RotateWheel(currentPrize);
+           switch (currentPrize.type)
+           {
+               case PrizeType.GOLD:
+                   Icon.sprite = coinSprite;
+                   break;
+               case PrizeType.HELICOPTER:
+                   Icon.sprite = helicopterSprite;
+                   break;
+               case PrizeType.HINT:
+                   Icon.sprite = hintSprite;
+                   break;
+               default:
+                   Icon.sprite = null;
+                   break;
+           }
+           amountPrizeTxt.text = currentPrize.amount.ToString();
        }
 
        public Prize GetPrize()
@@ -102,7 +127,7 @@ namespace DevDuck
        {
            finalAngle = 360/8 * prize.id + UnityEngine.Random.Range(0, 45);
            wheel.transform
-               .DORotate(new Vector3(0, 0, finalAngle + 360 * 5), 5f, RotateMode.FastBeyond360)
+               .DORotate(new Vector3(0, 0, finalAngle + 360 * 7), 5f, RotateMode.FastBeyond360)
                .SetEase(Ease.OutQuart)
                .OnComplete(() =>
                {
@@ -112,10 +137,41 @@ namespace DevDuck
 
        public void ShowPopupPrize(Prize prize)
        {
-           // Setup panel here ???
-           Debug.Log("Show Popup get Prize");
            PanelGetPrize.SetActive(true);
            getPrizeAnimator.Play("Show",0,0);
+       }
+
+       public void SetPrizeGeted(Prize prize, int multiple)
+       {
+           if (prize != null)
+           {
+               switch (prize.type)
+               {
+                   case PrizeType.GOLD:
+                       float golds = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
+                       Debug.Log(golds);
+                       golds +=  prize.amount;
+                       PlayerPrefs.SetFloat(PlayerPrefsManager.Coin, golds);
+                       Debug.Log(golds);
+                       Observer.Notify(EventAction.EVENT_UPDATE_COIN,null);
+                       break;
+                   case PrizeType.HELICOPTER:
+                       int currenHelicopter = PlayerPrefs.GetInt(PlayerPrefsManager.helicopterAmount);
+                       currenHelicopter += (int) prize.amount;
+                       PlayerPrefs.SetInt(PlayerPrefsManager.helicopterAmount, currenHelicopter);
+                       break;
+                   case PrizeType.HINT:
+                       int currenHint = PlayerPrefs.GetInt(PlayerPrefsManager.hintAmount);
+                       currenHint += (int) prize.amount;
+                       PlayerPrefs.SetInt(PlayerPrefsManager.hintAmount, currenHint);
+                       break;
+               }
+               prize = null;
+           }
+           else
+           {
+               Debug.LogError("Prize not found");
+           }
        }
     }
 }

@@ -14,6 +14,7 @@ public class PlayerPrefsManager
    public const string hintAmount =  "HintAmount";
    public const string helicopterAmount =  "HelicopterAmount";
    public const string land =  "land";
+   public const string carSkin =  "carSkin";
 }
 
 public static class GlobalData

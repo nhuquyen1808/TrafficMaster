@@ -8,20 +8,23 @@ namespace DevDuck
     public class LogicUI : MonoBehaviour
     {
         [SerializeField] LogicGame logicGame;
-        public Button hintButton, helicopterButton;
+        public EzButton hintButton, helicopterButton;
         public static LogicUI ins;
         [SerializeField] TextMeshProUGUI hintAmountText, heicopterAmountText, leveltText, movesText, coinText;
+
         [Header("Win Lose elements : ")] [SerializeField]
         public TextMeshProUGUI titleText;
+
         public GameObject bubbleHelicopter;
         [SerializeField] UiWinLose uiWinLose;
+
         private void Awake()
         {
             ins = this;
-            hintButton.onClick.AddListener(OnClickHintButton);
-            helicopterButton.onClick.AddListener(OnClickHelicopterButton);
-          
+            hintButton.onClick += OnClickHintButton;
+            helicopterButton.onClick += OnClickHelicopterButton;
         }
+
         private void OnClickHelicopterButton()
         {
             logicGame.CallHelicopter();
@@ -34,7 +37,6 @@ namespace DevDuck
 
         public void ShowWinPopup(int coin)
         {
-           
             titleText.text = "YOU WIN";
             coinText.text = (coin).ToString();
             AudioManager.instance.PlaySound("Win");

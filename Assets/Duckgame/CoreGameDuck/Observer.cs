@@ -12,7 +12,9 @@ namespace DevDuck
         EVENT_CAR_DISABLE,
         EVENT_CAR_HIT_REDLIGHT,
         EVENT_UPDATE_COIN,
-        EVENT_BUY_LANDMAT
+        EVENT_BUY_LANDMAT,
+        EVENT_BUY_CARMAT,
+        
         
     }
 

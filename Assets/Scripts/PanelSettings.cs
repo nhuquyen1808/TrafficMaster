@@ -7,10 +7,12 @@ namespace DevDuck
     public class PanelSettings : MonoBehaviour
     {
         public GameObject npopup, nShadow;
-        public Button settingsButton, closeButton, soundButton, musicButton,homeButton;
-        public  Sprite sprButtonOn, sprButtonOff;
+        public EzButton settingsButton, closeButton, soundButton, musicButton, homeButton;
+        public Sprite sprButtonOn, sprButtonOff;
+
         private void Awake()
         {
+            /*
             if (PlayerPrefs.GetInt(PlayerPrefsManager.FIRST_TIME_DOWNLOAD) == 0)
             {
                 Debug.Log("????//");
@@ -21,11 +23,13 @@ namespace DevDuck
                 PlayerPrefs.SetInt(PlayerPrefsManager.Coin, 500);
                 PlayerPrefs.SetInt(PlayerPrefsManager.FIRST_TIME_DOWNLOAD, 1);
             }
-            settingsButton.onClick.AddListener(OnClickSettingsButton);
-            closeButton.onClick.AddListener(OnClickCloseButton);
-            soundButton.onClick.AddListener(OnClickSoundButton);
-            musicButton.onClick.AddListener(OnClickMusicButton);
-            homeButton.onClick.AddListener(OnClickHomeButton);
+            */
+
+            settingsButton.onClick += (OnClickSettingsButton);
+            closeButton.onClick += OnClickCloseButton;
+            soundButton.onClick += OnClickSoundButton;
+            musicButton.onClick += OnClickMusicButton;
+            homeButton.onClick += OnClickHomeButton;
         }
 
         private void OnClickHomeButton()
@@ -34,6 +38,7 @@ namespace DevDuck
             DOTween.KillAll();
             ManagerScene.ins.LoadScene("SceneHome");
         }
+
         private void Start()
         {
             SetUpButtonOnstart();
@@ -61,6 +66,7 @@ namespace DevDuck
                 soundButton.GetComponent<Image>().sprite = sprButtonOff;
             }
         }
+
         private void OnClickMusicButton()
         {
             MusicButtonClicked();
@@ -74,14 +80,12 @@ namespace DevDuck
                 AudioManager.instance.StopPlayMusic();
                 PlayerPrefs.SetInt("MUSIC", 0);
                 musicButton.GetComponent<Image>().sprite = sprButtonOff;
-
             }
             else
             {
                 AudioManager.instance.ContinuePlayMusic();
                 PlayerPrefs.SetInt("MUSIC", 1);
                 musicButton.GetComponent<Image>().sprite = sprButtonOn;
-
             }
         }
 
@@ -98,14 +102,12 @@ namespace DevDuck
                 AudioManager.instance.StopPlaySound();
                 PlayerPrefs.SetInt("SOUND", 0);
                 soundButton.GetComponent<Image>().sprite = sprButtonOff;
-
             }
             else
             {
                 AudioManager.instance.ContinuePlaySound();
                 PlayerPrefs.SetInt("SOUND", 1);
                 soundButton.GetComponent<Image>().sprite = sprButtonOn;
-
             }
         }
 
@@ -117,14 +119,13 @@ namespace DevDuck
             {
                 nShadow.SetActive(false);
                 ManagerGame.TIME_SCALE = 1;
-               // GlobalData.isInGame = true;
-
+                // GlobalData.isInGame = true;
             });
         }
 
         private void OnClickSettingsButton()
         {
-          //  GlobalData.isInGame = false;
+            //  GlobalData.isInGame = false;
             ManagerGame.TIME_SCALE = 0;
             settingsButton.transform.DOScale(0.95f, 0.1f).OnComplete((() =>
             {

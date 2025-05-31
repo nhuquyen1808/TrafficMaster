@@ -1524,7 +1524,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1922800628}
-  - component: {fileID: 1922800627}
+  - component: {fileID: 1922800629}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1532,24 +1532,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1922800627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922800626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ee364be969c914b94716f91b459651, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  androidGameId: 5862557
-  iosGameId: 5862556
-  testMode: 1
-  showInterstitialButton: {fileID: 702740717}
-  showRewardedButton: {fileID: 2051033146}
-  showBannerdButton: {fileID: 462100204}
 --- !u!4 &1922800628
 Transform:
   m_ObjectHideFlags: 0
@@ -1565,6 +1547,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1922800629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922800626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aae7f5e280a3404a8e01834073313bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidGameId: 5862557
+  iosGameId: 5862556
+  testMode: 1
+  showInterstitialButton: {fileID: 702740717}
+  showRewardedButton: {fileID: 2051033146}
+  showBannerdButton: {fileID: 462100204}
 --- !u!1 &2051033144
 GameObject:
   m_ObjectHideFlags: 0

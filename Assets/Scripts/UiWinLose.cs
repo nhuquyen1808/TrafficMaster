@@ -20,7 +20,7 @@ namespace DevDuck
         public Image iconWinlose, ribbon;
         public Sprite winRibbon, loseRibbon, iconWin,iconOutOfMove,iconHumandHitted,iconTrunkHitted;
         [SerializeField] EffectGetCoin effectGetCoin;
-        public ParticleSystem confetifxParticle1, confetifxParticle2;
+        public ParticleSystem confetifxParticle1, confetifxParticle2,sparkleWin;
         private void Awake()
         {
             claimAdButton.onClick.AddListener(OnClickClaimAdButton);
@@ -59,9 +59,9 @@ namespace DevDuck
 
         public void ShowWinPanel()
         {
-            Debug.Log(LogicGame.instance.coinsGet);
             Duck.PlayParticle(confetifxParticle1);
             Duck.PlayParticle(confetifxParticle2);
+            Duck.PlayParticle(sparkleWin);
             nShadow.SetActive(true);
             iconWinlose.sprite = iconWin;
             ribbon.sprite = winRibbon;
