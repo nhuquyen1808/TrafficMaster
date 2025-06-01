@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace DevDuck
 {
@@ -23,12 +20,12 @@ namespace DevDuck
         public Image buttonImage;
         public State STATE;
         public Sprite ownerSprite, usingSprite, defaultSprite;
-        public Button equipButton;
+        public EzButton equipButton;
 
 
         private void Awake()
         {
-            equipButton.onClick.AddListener(OnClickEquipButton);
+            equipButton.onClick+= (OnClickEquipButton);
         }
 
         protected virtual void OnClickEquipButton()

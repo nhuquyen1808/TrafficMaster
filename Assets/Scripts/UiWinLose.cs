@@ -1,47 +1,53 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace DevDuck
 {
     public enum LOSETYPE
     {
-        OUT_OF_MOVES,HUMAND_HITTED,TRUNK_TANKER_HITTED
+        OUT_OF_MOVES,
+        HUMAND_HITTED,
+        TRUNK_TANKER_HITTED
     }
+
     public class UiWinLose : MonoBehaviour
     {
-        public Button claimAdButton, rePlayButton, nextButton, homeButton;
-
+        public EzButton claimAdButton, rePlayButton, nextButton, homeButton;
         [SerializeField] List<GameObject> uiElements = new List<GameObject>();
         public GameObject nShadow;
         public Image iconWinlose, ribbon;
-        public Sprite winRibbon, loseRibbon, iconWin,iconOutOfMove,iconHumandHitted,iconTrunkHitted;
+        public Sprite winRibbon, loseRibbon, iconWin, iconOutOfMove, iconHumandHitted, iconTrunkHitted;
         [SerializeField] EffectGetCoin effectGetCoin;
-        public ParticleSystem confetifxParticle1, confetifxParticle2,sparkleWin;
+        public ParticleSystem confetifxParticle1, confetifxParticle2, sparkleWin;
+        public TextMeshProUGUI ReasionText;
+        private List<String> WinTextList = new List<String>(){"Incredible!", "Perfect!","Wow!","Unbelievable!"};
         private void Awake()
         {
-            claimAdButton.onClick.AddListener(OnClickClaimAdButton);
-            rePlayButton.onClick.AddListener(OnClickReplayButton);
-            nextButton.onClick.AddListener(OnClickNextButton);
-            homeButton.onClick.AddListener(OnClickHomeAdButton);
+            claimAdButton.onClick += (OnClickClaimAdButton);
+            rePlayButton.onClick += (OnClickReplayButton);
+            nextButton.onClick += (OnClickNextButton);
+            homeButton.onClick += (OnClickHomeAdButton);
         }
+
         private void OnClickHomeAdButton()
         {
             ManagerScene.ins.LoadScene("SceneHome");
         }
+
         private void OnClickNextButton()
         {
-            nextButton.interactable = false;
+            nextButton.imageButton.raycastTarget = false;
             claimAdButton.GetComponent<Image>().raycastTarget = false;
             /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
             PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
-            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet/10,10, LoadSceneGame);
+            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet / 10, 10, LoadSceneGame);
         }
 
-      
 
         private void OnClickReplayButton()
         {
@@ -50,11 +56,11 @@ namespace DevDuck
 
         private void OnClickClaimAdButton()
         {
-            claimAdButton.interactable = false;
+            claimAdButton.imageButton.raycastTarget = false;
             nextButton.GetComponent<Image>().raycastTarget = false;
-                /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
-            PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
-            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet*2/10,10, LoadSceneGame);
+            /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
+        PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
+            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet * 2 / 10, 10, LoadSceneGame);
         }
 
         public void ShowWinPanel()
@@ -63,6 +69,7 @@ namespace DevDuck
             Duck.PlayParticle(confetifxParticle2);
             Duck.PlayParticle(sparkleWin);
             nShadow.SetActive(true);
+            
             iconWinlose.sprite = iconWin;
             ribbon.sprite = winRibbon;
             rePlayButton.gameObject.SetActive(false);
@@ -72,6 +79,7 @@ namespace DevDuck
                 var a = i;
                 uiElements[a].transform.DOScale(1, 0.2f).SetDelay(a * 0.1f);
             }
+            ReasionText.text = WinTextList[Random.Range(0, WinTextList.Count)];
         }
 
         public void ShowLosePanel(LOSETYPE loseType)
@@ -90,16 +98,19 @@ namespace DevDuck
             {
                 case LOSETYPE.OUT_OF_MOVES:
                     iconWinlose.sprite = iconOutOfMove;
+                    ReasionText.text = "Oop!Out of moves!";
                     break;
                 case LOSETYPE.HUMAND_HITTED:
                     iconWinlose.sprite = iconHumandHitted;
+                    ReasionText.text = "Oop!Don't hit pedestrian!";
                     break;
                 case LOSETYPE.TRUNK_TANKER_HITTED:
                     iconWinlose.sprite = iconTrunkHitted;
+                    ReasionText.text = "Oop!Don't hit trunk tanker!";
                     break;
             }
         }
-        
+
         private static void LoadSceneGame()
         {
             ManagerScene.ins.LoadScene("SceneGame");

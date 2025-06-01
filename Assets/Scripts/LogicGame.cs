@@ -41,17 +41,16 @@ public class LogicGame : MonoBehaviour
         Observer.AddObserver(EventAction.EVENT_GET_COIN_CAR, HandleGetCoinCar);
         Observer.AddObserver(EventAction.EVENT_CAR_TRIGGER, HandleCarTrigger);
         Observer.AddObserver(EventAction.EVENT_CAR_DISABLE, HandleCarDisable);
-        Observer.AddObserver(EventAction.EVENT_CAR_HIT_REDLIGHT,HandleHitRedLight);
+        Observer.AddObserver(EventAction.EVENT_CAR_HIT_REDLIGHT, HandleHitRedLight);
 
-        GlobalData.isInGame = true;
-        movesAmount = 100;
-        //SetData();
+
+        SetData();
     }
 
     private void HandleHitRedLight(object obj)
     {
         int minusMoveAmount = (int)obj;
-        movesAmount -=  minusMoveAmount;
+        movesAmount -= minusMoveAmount;
         logicUI.UpdateMovesText(movesAmount);
     }
 
@@ -61,17 +60,17 @@ public class LogicGame : MonoBehaviour
         Observer.RemoveObserver(EventAction.EVENT_GET_COIN_CAR, HandleGetCoinCar);
         Observer.RemoveObserver(EventAction.EVENT_CAR_TRIGGER, HandleCarTrigger);
         Observer.RemoveObserver(EventAction.EVENT_CAR_DISABLE, HandleCarDisable);
-        Observer.RemoveObserver(EventAction.EVENT_CAR_HIT_REDLIGHT,HandleHitRedLight);
+        Observer.RemoveObserver(EventAction.EVENT_CAR_HIT_REDLIGHT, HandleHitRedLight);
     }
 
-    private void SetData()
+    private async void SetData()
     {
         GlobalData.isInGame = true;
         poolCoin.SetupPool();
         poolSmoke.SetupPool();
         poolHint.SetupPool();
         if (PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock) == 0 ||
-            PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock) == 13)
+            PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock) == 21)
         {
             PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, 1);
         }
@@ -81,15 +80,20 @@ public class LogicGame : MonoBehaviour
         helicopterAmount = PlayerPrefs.GetInt(PlayerPrefsManager.helicopterAmount);
         coinsAmount = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
 
-        LevelGame currentLevelGameLoad = Resources.Load<LevelGame>($"Levels/Level_{currentLevel}");
-        LevelGame currentLevelGameSave =
-            Instantiate(currentLevelGameLoad, this.transform.position, Quaternion.identity);
-        currentLevelGameSave.transform.localScale = Vector3.one;
-        cars = currentLevelGameSave.cars;
-        movesAmount = currentLevelGameSave.moves;
-        carAmount = cars.Count;
-        coinsGet = carAmount * 10;
-        SetupText();
+        // LevelGame currentLevelGameLoad = Resources.Load<LevelGame>($"Levels/Level_{currentLevel}");
+        if (AddressableLoader.IsAssetExist($"Level_{currentLevel}", typeof(GameObject)))
+        {
+            GameObject currentLevelGameLoad = await AddressableLoader.LoadAsset<GameObject>($"Level_{currentLevel}");
+            LevelGame currentLevelGameSave =
+                Instantiate(currentLevelGameLoad.GetComponent<LevelGame>(), this.transform.position, Quaternion.identity);
+            currentLevelGameSave.transform.localScale = Vector3.one;
+            cars = currentLevelGameSave.cars;
+            movesAmount = currentLevelGameSave.moves;
+            carAmount = cars.Count;
+            coinsGet = carAmount * 10;
+            SetupText();
+            Debug.Log("???????????");
+        }
     }
 
     private void HandleCarDisable(object obj)
@@ -183,7 +187,7 @@ public class LogicGame : MonoBehaviour
                         cars[i].transform.position + new Vector3(0, 0.3f, 0),
                         Quaternion.identity);
                     hintPlace.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-                     Duck.PlayParticle(hintPlace.GetComponent<ParticleSystem>());
+                    Duck.PlayParticle(hintPlace.GetComponent<ParticleSystem>());
                     break;
                 }
             }

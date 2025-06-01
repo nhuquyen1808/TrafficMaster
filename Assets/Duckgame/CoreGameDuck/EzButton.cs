@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EzButton : MonoBehaviour, IPointerClickHandler
@@ -10,12 +11,12 @@ public class EzButton : MonoBehaviour, IPointerClickHandler
     public bool changeColorOnHover = true;
     public Color hoverColor = Color.gray;
     private Color originalColor;
-    private Image image;
+    [FormerlySerializedAs("image")] public Image imageButton;
 
     private void Awake()
     {
-        image = GetComponent<Image>();
-        originalColor = image.color;
+        imageButton = GetComponent<Image>();
+        originalColor = imageButton.color;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -31,14 +32,14 @@ public class EzButton : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (changeColorOnHover && image != null)
-            image.color = hoverColor;
+        if (changeColorOnHover && imageButton != null)
+            imageButton.color = hoverColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (changeColorOnHover && image != null)
-            image.color = originalColor;
+        if (changeColorOnHover && imageButton != null)
+            imageButton.color = originalColor;
     }
 
 

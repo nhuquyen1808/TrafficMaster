@@ -32,12 +32,11 @@ public class AudioManager : MonoBehaviour
             PlayBGMSound("BGM");
         }
     }
-    public void PlayBGMSound(string str)
+    public async void PlayBGMSound(string str)
     {
-      //  if (ManagerAsset.IsExist(str, typeof(AudioClip)))
+        if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))
         {
-          //  AudioClip clip = await ManagerAsset.LoadAssetAsync<AudioClip>(str);
-            AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
+            AudioClip clip = await AddressableLoader.LoadAsset<AudioClip>(str);
             for (int i = 0; i < sourcesMusic.Count; i++)
             {
                 if (!sourcesMusic[i].isPlaying)
@@ -64,13 +63,12 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    public void PlaySound(string str)
+    public async void PlaySound(string str)
     {
 
-       // if (ManagerAsset.IsExist(str, typeof(AudioClip)))
+        if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))
         {
-           // AudioClip clip = await ManagerAsset.LoadAssetAsync<AudioClip>(str);
-            AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
+            AudioClip clip = await AddressableLoader.LoadAsset<AudioClip>(str);
             for (int i = 0; i < sourcesSound.Count; i++)
             {
                 if (!sourcesSound[i].isPlaying)
@@ -96,13 +94,13 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-    public void PlayVoice(string str)
+    public async void PlayVoice(string str)
     {
 
-      //  if (ManagerAsset.IsExist(str, typeof(AudioClip)))
+        if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))
         {
-          //  AudioClip clip = await ManagerAsset.LoadAssetAsync<AudioClip>(str);
-            AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
+            AudioClip clip = await AddressableLoader.LoadAsset<AudioClip>(str);
+           // AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
             for (int i = 0; i < sourcesVoice.Count; i++)
             {
                 if (!sourcesVoice[i].isPlaying)
@@ -198,10 +196,10 @@ public class AudioManager : MonoBehaviour
 
     public async void PlayBGMMiniGame(string str)
     {
-      //  if (ManagerAsset.IsExist(str, typeof(AudioClip)))
+        if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))
         {
-          //  AudioClip clip = await ManagerAsset.LoadAssetAsync<AudioClip>(str);
-            AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
+            AudioClip clip = await AddressableLoader.LoadAsset<AudioClip>(str);
+          //  AudioClip clip = Resources.Load<AudioClip>($"SoundBase/{str}");
             for (int i = 0; i < sourcesMusicMiniGame.Count; i++)
             {
                 if (!sourcesMusicMiniGame[i].isPlaying)

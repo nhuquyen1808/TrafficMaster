@@ -20,6 +20,7 @@ namespace DevDuck
         private void OnClickBuyButton()
         {
             Debug.Log("Buy button clicked");
+            
         }
 
         private void OnClickCloseButton()
