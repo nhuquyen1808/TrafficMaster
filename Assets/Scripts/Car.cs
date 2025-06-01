@@ -249,7 +249,6 @@ public class Car : MonoBehaviour
                 this.GetComponent<Animator>().Play("CarBreak");
                 DOVirtual.DelayedCall(1, (() => LogicUI.ins.ShowLosePopup(LOSETYPE.TRUNK_TANKER_HITTED)));
                 AudioManager.instance.PlaySound("CarCrash");
-
                 Debug.Log("?????");
             }
         }
@@ -260,10 +259,11 @@ public class Car : MonoBehaviour
             sequence.Pause();
             this.transform.DOKill();
            // pedestrians.transform.DOKill();
-           pedestrians.Animator.enabled = false;
+            pedestrians.Animator.enabled = false;
             Vector3 dir = (pedestrians.transform.position - transform.position).normalized;
-            pedestrians.GetComponent<Rigidbody>().AddForce(dir * 2, ForceMode.Impulse);
-           // this.GetComponent<Rigidbody>().AddForce(dir * -3, ForceMode.Impulse);
+            boxCollider.enabled = false;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+            pedestrians.GetComponent<Rigidbody>().AddForce(dir * 10, ForceMode.Impulse);
             Debug.Log("hit pedestrian then show lose panel");
             DOVirtual.DelayedCall(1, (() => LogicUI.ins.ShowLosePopup(LOSETYPE.HUMAND_HITTED)));
         }
