@@ -25,13 +25,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-      private void Start()
+      /*private void Start()
     {
         if (PlayerPrefs.GetInt("MUSIC") == 1)
         {
             PlayBGMSound("BGM");
         }
-    }
+    }*/
     public async void PlayBGMSound(string str)
     {
         if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))

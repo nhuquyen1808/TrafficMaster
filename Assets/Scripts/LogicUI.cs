@@ -16,7 +16,7 @@ namespace DevDuck
 
         public GameObject bubbleHelicopter;
         [SerializeField] UiWinLose uiWinLose;
-
+        
         private void Awake()
         {
             ins = this;

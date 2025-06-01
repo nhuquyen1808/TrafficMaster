@@ -266,6 +266,7 @@ public class Car : MonoBehaviour
             pedestrians.GetComponent<Rigidbody>().AddForce(dir * 10, ForceMode.Impulse);
             Debug.Log("hit pedestrian then show lose panel");
             DOVirtual.DelayedCall(1, (() => LogicUI.ins.ShowLosePopup(LOSETYPE.HUMAND_HITTED)));
+            AudioManager.instance.PlaySound("CarCrash");
         }
         TankerTruck tankerTruck = col.gameObject.GetComponent<TankerTruck>();
         if (tankerTruck != null)
@@ -299,30 +300,13 @@ public class Car : MonoBehaviour
             canInsCoin = true;
             Observer.Notify(EventAction.EVENT_GET_COIN_CAR, boxCollider.transform.position);
             Observer.Notify(EventAction.EVENT_CAR_DISABLE, this);
-            // LogicGame.instance.CheckLose();
+           
             sequenceDummy.Complete();
             sequence.Complete();
             AudioManager.instance.PlaySound("Coin");
             LogicGame.instance.CheckWin();
             Destroy(boxCollider.gameObject, 0.5f);
         }
-        /*var bounds = meshCol.bounds;
-        cameraFrustum = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-        if (GeometryUtility.TestPlanesAABB(cameraFrustum, bounds))
-        {
-        }
-        else
-        {
-            if (!canInsCoin)
-            {
-                Vector3 v = meshCol.transform.position - 2.5f * transform.forward + new Vector3(0, 2f, 0);
-                Observer.Notify(EventAction.EVENT_CAR_DONE_ACTION, true);
-                //  Time.timeScale = 0 ;
-                canInsCoin = true;
-
-                Debug.Log("out off scene  : " + v);
-            }
-        }*/
     }
 
     IEnumerator AddPoint()

@@ -41,6 +41,7 @@ namespace DevDuck
 
         private void OnClickNextButton()
         {
+            AudioManager.instance.PlaySound("Coin");
             nextButton.imageButton.raycastTarget = false;
             claimAdButton.GetComponent<Image>().raycastTarget = false;
             /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
@@ -56,6 +57,7 @@ namespace DevDuck
 
         private void OnClickClaimAdButton()
         {
+            AudioManager.instance.PlaySound("Coin");
             claimAdButton.imageButton.raycastTarget = false;
             nextButton.GetComponent<Image>().raycastTarget = false;
             /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);

@@ -9,7 +9,7 @@ namespace DevDuck
         public GameObject npopup, nShadow;
         public EzButton settingsButton, closeButton, soundButton, musicButton, homeButton;
         public Sprite sprButtonOn, sprButtonOff;
-
+        
         private void Awake()
         {
             /*

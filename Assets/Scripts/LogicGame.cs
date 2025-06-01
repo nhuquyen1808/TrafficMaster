@@ -26,6 +26,7 @@ public class LogicGame : MonoBehaviour
     [SerializeField] int hintAmount, helicopterAmount, movesAmount, currentLevel;
     [SerializeField] float coinsAmount;
     public int carAmount;
+    [SerializeField] Tutorial tutorial;
     public int coinsGet { get; private set; }
 
     private void Awake()
@@ -45,6 +46,7 @@ public class LogicGame : MonoBehaviour
 
 
         SetData();
+        tutorial.ShowTutorial(TutotialType.GAMEPLAY_TUT);
     }
 
     private void HandleHitRedLight(object obj)
@@ -52,6 +54,7 @@ public class LogicGame : MonoBehaviour
         int minusMoveAmount = (int)obj;
         movesAmount -= minusMoveAmount;
         logicUI.UpdateMovesText(movesAmount);
+        AudioManager.instance.PlaySound("ThroughRedLine");
     }
 
     private void OnDestroy()
@@ -92,7 +95,6 @@ public class LogicGame : MonoBehaviour
             carAmount = cars.Count;
             coinsGet = carAmount * 10;
             SetupText();
-            Debug.Log("???????????");
         }
     }
 

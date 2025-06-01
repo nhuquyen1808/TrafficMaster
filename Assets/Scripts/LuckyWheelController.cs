@@ -60,6 +60,9 @@ namespace DevDuck
 
         private void OnClickGetButtonAd()
         {
+            AudioManager.instance.PlaySound("Coin");
+            SpinButton.imageButton.raycastTarget = true;
+            SpinButtonAd.imageButton.raycastTarget = true;
             PanelGetPrize.SetActive(false);
             Debug.Log("Get x2 prize");
             SetPrizeGeted(currentPrize, 2);
@@ -67,6 +70,9 @@ namespace DevDuck
 
         private void OnClickGetButton()
         {
+            AudioManager.instance.PlaySound("Coin");
+            SpinButton.imageButton.raycastTarget = true;
+            SpinButtonAd.imageButton.raycastTarget = true;
             Debug.Log("Get prize");
             PanelGetPrize.SetActive(false);
             SetPrizeGeted(currentPrize, 1);
@@ -75,6 +81,8 @@ namespace DevDuck
 
         private void OnClickSpinButton()
         {
+            SpinButton.imageButton.raycastTarget = false;
+            SpinButtonAd.imageButton.raycastTarget = false;
             AudioManager.instance.PlaySound("LuckyWheel");
             currentPrize = GetPrize();
             Debug.Log(currentPrize.type + "    " + currentPrize.amount);
@@ -137,6 +145,7 @@ namespace DevDuck
 
         public void ShowPopupPrize(Prize prize)
         {
+            AudioManager.instance.PlaySound("OpenLuckyWheel");
             PanelGetPrize.SetActive(true);
             getPrizeAnimator.Play("Show", 0, 0);
         }

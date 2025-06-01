@@ -27,7 +27,7 @@ namespace DevDuck
         public NoAdsManager noAdsManager;
         [SerializeField] GameObject luckyWheelPanel;
         [SerializeField] private GameObject handtut;
-        
+
         private void Awake()
         {
             playButton.onClick += OnClickPlayButton;
@@ -41,17 +41,21 @@ namespace DevDuck
             Debug.Log("Show LuckyWheel");
             luckyWheelPanel.SetActive(true);
         }
+
         private void OnClickNoAdsButton()
         {
             noAdsManager.ShowNoAds();
         }
+
         private void Start()
         {
             Addressables.InitializeAsync();
             StartCoroutine(ShowElements());
-            AudioManager.instance.PlayBGMSound("BGM");
-            
-            
+            if (AudioManager.instance.sourcesMusic.Count == 0)
+            {
+                AudioManager.instance.PlayBGMSound("BGM");
+            }
+
             int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock, 0);
             if (currentLevel == 0)
             {
@@ -105,13 +109,13 @@ namespace DevDuck
             shopButton.gameObject.SetActive(false);
             luckyWheelButton.gameObject.SetActive(false);
             noAdsButton.gameObject.SetActive(false);
-            car.transform.DOMoveZ(3.5f, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+            car.transform.DOMoveZ(2.5f, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 ManagerScene.ins.LoadScene("SceneGame");
                 GlobalData.isInGame = true;
             });
             playButton.GetComponent<Image>().raycastTarget = false;
-            playButton.GetComponent<CanvasGroup>().DOFade(0,0.3f) ;
+            playButton.GetComponent<CanvasGroup>().DOFade(0, 0.3f);
         }
     }
 }
