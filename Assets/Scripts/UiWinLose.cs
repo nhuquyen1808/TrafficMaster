@@ -19,12 +19,12 @@ namespace DevDuck
     {
         public EzButton claimAdButton, rePlayButton, nextButton, homeButton;
         [SerializeField] List<GameObject> uiElements = new List<GameObject>();
-        public GameObject nShadow;
-        public Image iconWinlose, ribbon;
-        public Sprite winRibbon, loseRibbon, iconWin, iconOutOfMove, iconHumandHitted, iconTrunkHitted;
+        [SerializeField] private GameObject nShadow;
+        [SerializeField] private Image iconWinlose, ribbon;
+        [SerializeField] private Sprite winRibbon, loseRibbon, iconWin, iconOutOfMove, iconHumandHitted, iconTrunkHitted;
         [SerializeField] EffectGetCoin effectGetCoin;
-        public ParticleSystem confetifxParticle1, confetifxParticle2, sparkleWin;
-        public TextMeshProUGUI ReasionText;
+        [SerializeField] private ParticleSystem confetifxParticle1, confetifxParticle2, sparkleWin;
+        [SerializeField] private TextMeshProUGUI ReasionText;
         private List<String> WinTextList = new List<String>(){"Incredible!", "Perfect!","Wow!","Unbelievable!"};
         private void Awake()
         {

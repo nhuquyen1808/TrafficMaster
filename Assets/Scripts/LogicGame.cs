@@ -28,6 +28,8 @@ public class LogicGame : MonoBehaviour
     public int carAmount;
     [SerializeField] Tutorial tutorial;
     public int coinsGet { get; private set; }
+    public GameObject coinIconUI;
+    Vector3 coinIconPosition;
 
     private void Awake()
     {
@@ -46,7 +48,10 @@ public class LogicGame : MonoBehaviour
 
 
         SetData();
-        tutorial.ShowTutorial(TutotialType.GAMEPLAY_TUT);
+        tutorial.SetTutAndShow();
+        logicUI.SetLockBooster();
+        coinIconPosition = _cam.ScreenToWorldPoint(coinIconUI.GetComponent<RectTransform>().position);
+        Debug.Log("coinIconPosition     :       " + coinIconPosition);
     }
 
     private void HandleHitRedLight(object obj)
@@ -88,7 +93,8 @@ public class LogicGame : MonoBehaviour
         {
             GameObject currentLevelGameLoad = await AddressableLoader.LoadAsset<GameObject>($"Level_{currentLevel}");
             LevelGame currentLevelGameSave =
-                Instantiate(currentLevelGameLoad.GetComponent<LevelGame>(), this.transform.position, Quaternion.identity);
+                Instantiate(currentLevelGameLoad.GetComponent<LevelGame>(), this.transform.position,
+                    Quaternion.identity);
             currentLevelGameSave.transform.localScale = Vector3.one;
             cars = currentLevelGameSave.cars;
             movesAmount = currentLevelGameSave.moves;
@@ -205,7 +211,6 @@ public class LogicGame : MonoBehaviour
 
     public void CallHelicopter()
     {
-        Debug.Log("Call Helicopter");
         if (helicopterAmount > 0)
         {
             if (isUsingHelicopter)
@@ -225,13 +230,20 @@ public class LogicGame : MonoBehaviour
         }
     }
 
+
     private void HandleGetCoinCar(object obj)
     {
         Vector3 position = (Vector3)obj;
         PooledObject coinAnim =
             poolCoin.GetPooledObject(position + new Vector3(0, 0.5f, 0), Quaternion.Euler(new Vector3(0, 90, 0)));
         coinAnim.transform.DOLocalJump(position - 5 * _directionInsCoin, 1, 3, 1)
-            .OnComplete(() => coinAnim.ReturnToPool());
+            .OnComplete(() =>
+            {
+                coinAnim.transform.DOMove(coinIconPosition, 1f).SetEase(Ease.InOutQuart).OnComplete(() =>
+                {
+                    coinAnim.ReturnToPool();
+                });
+            });
         _currentCar = null;
         _directionInsCoin = Vector3.zero;
         coin += 10;

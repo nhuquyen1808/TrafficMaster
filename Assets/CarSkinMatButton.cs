@@ -8,7 +8,6 @@ namespace DevDuck
         {
             if (STATE == State.DEFAULT || STATE == State.UNLOCKED || STATE == State.USING)
             {
-                Debug.Log("Equip material");
                 PlayerPrefs.SetInt(PlayerPrefsManager.land, Id);
                 Observer.Notify(EventAction.EVENT_BUY_CARMAT, Id);
             }
@@ -18,10 +17,8 @@ namespace DevDuck
             else if (STATE == State.LOCKED)
             {
                 float coin = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
-                Debug.Log("Coin: " + coin);
                 if (coin >= Price)
                 {
-                    Debug.Log("Buy Car material");
                     coin -= Price;
                     PlayerPrefs.SetFloat(PlayerPrefsManager.Coin, coin);
                     STATE = State.UNLOCKED;

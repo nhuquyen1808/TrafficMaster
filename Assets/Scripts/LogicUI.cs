@@ -7,15 +7,17 @@ namespace DevDuck
     public class LogicUI : MonoBehaviour
     {
         [SerializeField] LogicGame logicGame;
-        public EzButton hintButton, helicopterButton;
+        [SerializeField] private EzButton hintButton, helicopterButton;
         public static LogicUI ins;
         [SerializeField] TextMeshProUGUI hintAmountText, heicopterAmountText, leveltText, movesText, coinText;
 
         [Header("Win Lose elements : ")] [SerializeField]
         public TextMeshProUGUI titleText;
 
-        public GameObject bubbleHelicopter;
+        [SerializeField] private GameObject bubbleHelicopter;
         [SerializeField] UiWinLose uiWinLose;
+        
+        [SerializeField] Sprite lockSprite,helicopterIconSprite,hintIconSprite;
         
         private void Awake()
         {
@@ -81,6 +83,33 @@ namespace DevDuck
         public void UpdateMovesText(int move)
         {
             movesText.text = "Moves : " + move.ToString();
+        }
+
+        public void SetLockBooster()
+        {
+            int currentLevelUnlock = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
+            if (currentLevelUnlock < 3)
+            {
+                Debug.Log(" < 3");
+                helicopterButton.imageButton.sprite = lockSprite;
+                hintButton.imageButton.sprite = lockSprite;
+                helicopterButton.imageButton.raycastTarget = false;
+                hintButton.imageButton.raycastTarget = false;
+            }
+            else if  (currentLevelUnlock >= 3 && currentLevelUnlock < 6)
+            {
+                Debug.Log(" < 3 && < 6");
+
+                helicopterButton.imageButton.sprite = helicopterIconSprite;
+                hintButton.imageButton.sprite = lockSprite;
+                hintButton.imageButton.raycastTarget = false;
+            }
+            else /*if  (currentLevelUnlock == 6)*/
+            {
+                Debug.Log(" else...........");
+                helicopterButton.imageButton.sprite = helicopterIconSprite;
+                hintButton.imageButton.sprite = hintIconSprite;
+            }
         }
     }
 }

@@ -4,11 +4,11 @@ namespace DevDuck
 {
     public class CarColor : MonoBehaviour
     {
-        public Material blackMaterial,blueMaterial, darkblueMaterial,
+        [SerializeField] private Material blackMaterial,blueMaterial, darkblueMaterial,
             brownMaterial, GrayMaterial, greenMaterial,orangeMaterial,pinkMaterial, redMaterial,
             turquoiseMaterial, violetMaterial, whiteMaterial, yellowMaterial;
 
-        public MeshRenderer meshRenderer;
+        [SerializeField] private MeshRenderer meshRenderer;
 
         private void Start()
         {

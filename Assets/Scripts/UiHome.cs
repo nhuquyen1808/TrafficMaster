@@ -106,9 +106,12 @@ namespace DevDuck
 
         private void OnClickPlayButton()
         {
-            shopButton.gameObject.SetActive(false);
-            luckyWheelButton.gameObject.SetActive(false);
-            noAdsButton.gameObject.SetActive(false);
+            shopButton.imageButton.raycastTarget = false;
+            shopButton.GetComponent<RectTransform>().DOAnchorPos(shopButton.GetComponent<RectTransform>().anchoredPosition + new Vector2(300,0), 0.5f);
+            luckyWheelButton.imageButton.raycastTarget = false;
+            luckyWheelButton.GetComponent<RectTransform>().DOAnchorPos(luckyWheelButton.GetComponent<RectTransform>().anchoredPosition + new Vector2(-300,0), .5f);
+            noAdsButton.imageButton.raycastTarget = false;
+            noAdsButton.GetComponent<RectTransform>().DOAnchorPos(noAdsButton.GetComponent<RectTransform>().anchoredPosition + new Vector2(-300,0), 0.5f);
             car.transform.DOMoveZ(2.5f, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
             {
                 ManagerScene.ins.LoadScene("SceneGame");

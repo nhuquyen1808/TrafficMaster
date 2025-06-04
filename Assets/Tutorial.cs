@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,19 +28,19 @@ namespace DevDuck
 
     public class Tutorial : MonoBehaviour
     {
-        public GameObject nShadow;
-        public CanvasGroup nTutorial;
-        public EzButton nextTutorial, prevTutorial,OKButton;
-        public Image imgContent;
-        public TextMeshProUGUI txtContent;
-
+        [SerializeField] private GameObject nShadow;
+        [SerializeField] private CanvasGroup nTutorial;
+        [SerializeField] private EzButton nextTutorial, prevTutorial,OKButton;
+        [SerializeField] private Image imgContent;
+        [SerializeField] private TextMeshProUGUI txtContent;
+        [SerializeField] private CanvasGroup nGroupContent;
 
         [Header("List Content")] public List<Content> contentGamePlayTut = new List<Content>();
-        public List<Content> contentHintTut = new List<Content>();
-        public List<Content> contentHelicopterTut = new List<Content>();
-        public List<Content> contentTrunkTankerTut = new List<Content>();
-        public List<Content> contentHitHumanTut = new List<Content>();
-        public List<Content> contentHitRedLightTut = new List<Content>();
+        [SerializeField] private List<Content> contentHintTut = new List<Content>();
+        [SerializeField] private List<Content> contentHelicopterTut = new List<Content>();
+        [SerializeField] private List<Content> contentTrunkTankerTut = new List<Content>();
+        [SerializeField] private List<Content> contentHitHumanTut = new List<Content>();
+        [SerializeField] private List<Content> contentHitRedLightTut = new List<Content>();
 
         [Header("Current content : ")] [SerializeField]
         private int totalContentShow, currentContentShow;
@@ -51,7 +52,6 @@ namespace DevDuck
             nextTutorial.onClick += OnClickNextTutButton;
             prevTutorial.onClick += OnClickPrevTutButton;
             OKButton.onClick += OnClickOKButton;
-            
         }
 
         private void OnClickOKButton()
@@ -62,7 +62,6 @@ namespace DevDuck
 
         private void OnClickPrevTutButton()
         {
-            Debug.Log("  Prev Tutorial ");
             --currentContentShow;
             ShowContent(currentContentShow);
         }
@@ -72,10 +71,9 @@ namespace DevDuck
             if(currentContentShow == totalContentShow-1) return;
             currentContentShow++;
             ShowContent(currentContentShow);
-            Debug.Log("  Next Tutorial ");
         }
 
-        public void ShowTutorial(TutotialType type)
+        private void ShowTutorial(TutotialType type)
         {
             GlobalData.isInGame = false;
             SetUpTutorial(type);
@@ -114,10 +112,10 @@ namespace DevDuck
 
         private void ShowContent(int currentContentShow)
         {
+            nGroupContent.alpha = 0;
             imgContent.sprite = currentContent[currentContentShow].sprite;
             txtContent.text = currentContent[currentContentShow].contentTut;
-            
-            
+            nGroupContent.DOFade(1, 0.2f);
             if (currentContentShow == 0)
             {
                 prevTutorial.gameObject.SetActive(false);
@@ -134,6 +132,34 @@ namespace DevDuck
             else
             {
                 nextTutorial.gameObject.SetActive(true);
+            }
+        }
+
+        public void SetTutAndShow()
+        {
+            switch (PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock))
+            {
+                case 1:
+                    ShowTutorial(TutotialType.GAMEPLAY_TUT);
+                    break;
+                case 3:
+                    ShowTutorial(TutotialType.HELICOPTER_TUT);
+                    break;
+                case 4:
+                    ShowTutorial(TutotialType.TRUNK_TANKER_TUT);
+                    break;
+                case 6:
+                    ShowTutorial(TutotialType.HINT_TUT);
+                    break;
+                case 9:
+                    ShowTutorial(TutotialType.HIT_REDlIGHT_TUT);
+                    break;
+                case 14:
+                    ShowTutorial(TutotialType.HIT_HUMMAN_TUT);
+                    break;
+                default:
+                    Debug.Log("No tut at this level");
+                    break;
             }
         }
     }

@@ -66,7 +66,7 @@ namespace DevDuck
                         count++;
                         if (count == coinNum)
                         {
-                            Debug.Log("Done");
+                            Debug.Log("Done and next scene  ");
                             action.Invoke();
                         }
                     });
