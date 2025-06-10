@@ -8,16 +8,6 @@ public class ObjectPool : MonoBehaviour
     public uint InitPoolSize => initPoolSize;
     [SerializeField] private PooledObject objectToPool;
     private Stack<PooledObject> stack;
-    /*private void Start()
-    {
-        SetupPool();
-    }*/
-
-    public virtual void Start()
-    {
-        
-    }
-
     public void SetupPool()
     {
         if (objectToPool == null)

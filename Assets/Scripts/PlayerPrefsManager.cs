@@ -8,7 +8,6 @@ public class PlayerPrefsManager
    public const string LevelUnlock = "LevelUnlock";
    public const string hint  =  "Hint";
    public const string FIRST_TIME_DOWNLOAD  = "FirstTimeDownload";
-   public const string LevelReal = "LevelReal";
    public const string UI_HOME = "UIHome";
    
    public const string hintAmount =  "HintAmount";

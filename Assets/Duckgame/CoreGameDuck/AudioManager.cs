@@ -4,34 +4,24 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
     public List<AudioSource> sourcesMusic = new List<AudioSource>();
     public List<AudioSource> sourcesMusicMiniGame = new List<AudioSource>();
     public List<AudioSource> sourcesSound = new List<AudioSource>();
     public List<AudioSource> sourcesVoice = new List<AudioSource>();
     public bool isSound, isMusic;
 
-
+    public static AudioManager instance {get; private set;}
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
+            Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Destroy(gameObject); 
-        }
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-      /*private void Start()
-    {
-        if (PlayerPrefs.GetInt("MUSIC") == 1)
-        {
-            PlayBGMSound("BGM");
-        }
-    }*/
     public async void PlayBGMSound(string str)
     {
         if (AddressableLoader.IsAssetExist(str, typeof(AudioClip)))

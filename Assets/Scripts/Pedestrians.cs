@@ -10,7 +10,5 @@ namespace DevDuck
     {
         public Rigidbody rb;
        public Animator Animator;
-        
-      
     }
 }

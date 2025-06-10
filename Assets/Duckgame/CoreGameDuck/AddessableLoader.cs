@@ -35,9 +35,7 @@ public static class AddressableLoader
     }*/
     public static bool IsAssetExist(string addressableName, System.Type assetType)
     {
-        // Get the list of ResourceLocators in Addressable
         var locators = Addressables.ResourceLocators;
-        // Check if the asset is in any ResourceLocator
         foreach (IResourceLocator locator in locators)
         {
             if (locator.Locate(addressableName, assetType, out var locations) && locations.Count > 0)

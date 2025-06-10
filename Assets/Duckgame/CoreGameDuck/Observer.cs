@@ -14,14 +14,11 @@ namespace DevDuck
         EVENT_UPDATE_COIN,
         EVENT_BUY_LANDMAT,
         EVENT_BUY_CARMAT,
-        
-        
     }
 
     public class Observer
     {
-        public static Dictionary<string, List<Action<object>>> Listeners = new Dictionary<string, List<Action<object>>>
-            { };
+        public static Dictionary<string, List<Action<object>>> Listeners = new Dictionary<string, List<Action<object>>> { };
 
         public static void AddObserver(EventAction act, Action<object> callback)
         {
@@ -32,14 +29,12 @@ namespace DevDuck
 
             Listeners[act.ToString()].Add(callback);
         }
-
         public static void RemoveObserver(EventAction act, Action<object> callback)
         {
             if (!Listeners.ContainsKey(act.ToString()))
                 return;
             Listeners[act.ToString()].Remove(callback);
         }
-
         public static void Notify(EventAction act, object datas)
         {
             if (!Listeners.ContainsKey(act.ToString()))

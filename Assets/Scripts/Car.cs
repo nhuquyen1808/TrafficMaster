@@ -69,7 +69,7 @@ public class Car : MonoBehaviour
                 carDirectionSprite.sprDirection.sprite = null;
             }
             gameObject.layer = LayerMask.NameToLayer("CarDisable");
-            LogicGame.instance.CheckWin();
+            LogicGame.instance.CheckWinLose();
             isOnRunning = false;
 
         }
@@ -82,7 +82,6 @@ public class Car : MonoBehaviour
         for (int i = 1; i < ListPosition.Count; ++i)
         {
             Vector3 temp = ListPosition[i] - ListPosition[i - 1];
-            //  sequence.PrependCallback(() => { canInsCoin = true; });
             sequence.Append(transform.DOMove(ListPosition[i], (ListPosition[i] - ListPosition[i - 1]).magnitude / 25f)
                 .OnUpdate(() =>
                 {
@@ -300,11 +299,10 @@ public class Car : MonoBehaviour
             canInsCoin = true;
             Observer.Notify(EventAction.EVENT_GET_COIN_CAR, boxCollider.transform.position);
             Observer.Notify(EventAction.EVENT_CAR_DISABLE, this);
-           
             sequenceDummy.Complete();
             sequence.Complete();
             AudioManager.instance.PlaySound("Coin");
-            LogicGame.instance.CheckWin();
+            LogicGame.instance.CheckWinLose();
             Destroy(boxCollider.gameObject, 0.5f);
         }
     }
