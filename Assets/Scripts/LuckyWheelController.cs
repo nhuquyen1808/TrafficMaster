@@ -55,16 +55,27 @@ namespace DevDuck
 
         private void OnClickSpinAdButton()
         {
+            if (ManagerToast.instance.isHasInternetConnection == false)
+            {
+                ManagerToast.instance.Show();
+                return;
+            }
             Debug.Log("Spin by watch ad");
+            Spin();
         }
 
         private void OnClickGetButtonAd()
         {
+            if (ManagerToast.instance.isHasInternetConnection == false)
+            {
+                ManagerToast.instance.Show();
+                return;
+            }
+
             AudioManager.instance.PlaySound("Coin");
             SpinButton.imageButton.raycastTarget = true;
             SpinButtonAd.imageButton.raycastTarget = true;
             PanelGetPrize.SetActive(false);
-            Debug.Log("Get x2 prize");
             SetPrizeGeted(currentPrize, 2);
         }
 
@@ -73,7 +84,6 @@ namespace DevDuck
             AudioManager.instance.PlaySound("Coin");
             SpinButton.imageButton.raycastTarget = true;
             SpinButtonAd.imageButton.raycastTarget = true;
-            Debug.Log("Get prize");
             PanelGetPrize.SetActive(false);
             SetPrizeGeted(currentPrize, 1);
             //gameObj1.GetComponent<RectTransform>().DOMove(gameObj2.GetComponent<RectTransform>().position, 1.2f).SetEase(Ease.InBack);
@@ -81,11 +91,15 @@ namespace DevDuck
 
         private void OnClickSpinButton()
         {
+            Spin();
+        }
+
+        private void Spin()
+        {
             SpinButton.imageButton.raycastTarget = false;
             SpinButtonAd.imageButton.raycastTarget = false;
             AudioManager.instance.PlaySound("LuckyWheel");
             currentPrize = GetPrize();
-            Debug.Log(currentPrize.type + "    " + currentPrize.amount);
             RotateWheel(currentPrize);
             switch (currentPrize.type)
             {

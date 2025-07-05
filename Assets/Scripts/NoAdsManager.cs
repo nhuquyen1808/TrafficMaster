@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,14 +18,15 @@ namespace DevDuck
             BuyButton.onClick+=(OnClickBuyButton);
 
         }
-
-        private void Start()
-        {
-            
-        }
-
         private void OnClickBuyButton()
         {
+            if (ManagerToast.instance.isHasInternetConnection == false)
+            {
+                ManagerToast.instance.Show();
+                return;
+            } 
+          
+            
             if (PlayerPrefs.GetInt("IAPPurchased") == 0)
             {
                 PlayerPrefs.SetInt("IAPPurchased", 1);

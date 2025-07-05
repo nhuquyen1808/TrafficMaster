@@ -33,12 +33,10 @@ namespace DevDuck
             nextButton.onClick += (OnClickNextButton);
             homeButton.onClick += (OnClickHomeAdButton);
         }
-
         private void OnClickHomeAdButton()
         {
             ManagerScene.ins.LoadScene("SceneHome");
         }
-
         private void OnClickNextButton()
         {
             AudioManager.instance.PlaySound("Coin");
@@ -48,13 +46,10 @@ namespace DevDuck
             PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
             effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet / 10, 10, LoadSceneGame);
         }
-
-
         private void OnClickReplayButton()
         {
             LoadSceneGame();
         }
-
         private void OnClickClaimAdButton()
         {
             AudioManager.instance.PlaySound("Coin");
@@ -64,7 +59,6 @@ namespace DevDuck
         PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
             effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet * 2 / 10, 10, LoadSceneGame);
         }
-
         public void ShowWinPanel()
         {
             Duck.PlayParticle(confetifxParticle1);
@@ -83,7 +77,6 @@ namespace DevDuck
             }
             ReasionText.text = WinTextList[Random.Range(0, WinTextList.Count)];
         }
-
         public void ShowLosePanel(LOSETYPE loseType)
         {
             nShadow.SetActive(true);

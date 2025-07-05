@@ -51,7 +51,6 @@ public class LogicGame : MonoBehaviour
         tutorial.SetTutAndShow();
         logicUI.SetLockBooster();
         coinIconPosition = _cam.ScreenToWorldPoint(coinIconUI.GetComponent<RectTransform>().position);
-        Debug.Log("coinIconPosition     :       " + coinIconPosition);
     }
 
     private void HandleHitRedLight(object obj)
@@ -162,7 +161,6 @@ public class LogicGame : MonoBehaviour
                 {
                     carAmount--;
                     AudioManager.instance.PlaySound("Helicopter");
-                    Debug.Log("??????");
                     isUsingHelicopter = false;
                     GlobalData.isInGame = false;
                     helicopter.MoveToCar(_currentCar);

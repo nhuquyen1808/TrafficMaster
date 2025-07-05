@@ -40,7 +40,6 @@ public class Car : MonoBehaviour
     RaycastHit _hitInfo;
     public bool isOnRunning;
     private CarDirectionSprite carDirectionSprite;
-
     public bool isCheckRedLight;
     
     private void Start()

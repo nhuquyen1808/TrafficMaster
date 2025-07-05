@@ -106,7 +106,6 @@ namespace DevDuck
             }
             else /*if  (currentLevelUnlock == 6)*/
             {
-                Debug.Log(" else...........");
                 helicopterButton.imageButton.sprite = helicopterIconSprite;
                 hintButton.imageButton.sprite = hintIconSprite;
             }
