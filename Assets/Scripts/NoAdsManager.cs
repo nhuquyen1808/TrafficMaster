@@ -20,11 +20,11 @@ namespace DevDuck
         }
         private void OnClickBuyButton()
         {
-            if (ManagerToast.instance.isHasInternetConnection == false)
+            /*if (ManagerToast.instance.isHasInternetConnection == false)
             {
                 ManagerToast.instance.Show();
                 return;
-            } 
+            } */
           
             
             if (PlayerPrefs.GetInt("IAPPurchased") == 0)

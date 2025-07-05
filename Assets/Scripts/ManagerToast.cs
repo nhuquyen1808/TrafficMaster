@@ -21,7 +21,7 @@ public class ManagerToast : MonoBehaviour
         else
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+//            DontDestroyOnLoad(gameObject);
         }
 
         okButton.onClick += OnClickOkButton;
@@ -29,7 +29,7 @@ public class ManagerToast : MonoBehaviour
 
     private void Start()
     {
-        CheckInternetConnection();
+     //   CheckInternetConnection();
     }
 
     private void OnClickOkButton()

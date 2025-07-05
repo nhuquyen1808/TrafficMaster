@@ -95,11 +95,14 @@ public class LogicGame : MonoBehaviour
                 Instantiate(currentLevelGameLoad.GetComponent<LevelGame>(), this.transform.position,
                     Quaternion.identity);
             currentLevelGameSave.transform.localScale = Vector3.one;
+            currentLevelGameSave.transform.position = Vector3.zero;
             cars = currentLevelGameSave.cars;
             movesAmount = currentLevelGameSave.moves;
             carAmount = cars.Count;
             coinsGet = carAmount * 10;
             SetupText();
+            Debug.Log(currentLevelGameLoad +  "_________________");
+            Debug.Log(currentLevelGameSave +  "++++++++++++++++");
         }
     }
 
