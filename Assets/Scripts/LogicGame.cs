@@ -29,7 +29,7 @@ public class LogicGame : MonoBehaviour
     public int coinsGet { get; private set; }
     public GameObject coinIconUI;
     Vector3 coinIconPosition;
-
+    private LevelGame currentLevelGameSave;
     public static LogicGame instance;
     private void Awake()
     {
@@ -87,22 +87,21 @@ public class LogicGame : MonoBehaviour
         helicopterAmount = PlayerPrefs.GetInt(PlayerPrefsManager.helicopterAmount);
         coinsAmount = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
 
-        // LevelGame currentLevelGameLoad = Resources.Load<LevelGame>($"Levels/Level_{currentLevel}");
+      //   LevelGame currentLevelGameLoad = Resources.Load<LevelGame>($"Levels/Level_{currentLevel}");
         if (AddressableLoader.IsAssetExist($"Level_{currentLevel}", typeof(GameObject)))
         {
-            GameObject currentLevelGameLoad = await AddressableLoader.LoadAsset<GameObject>($"Level_{currentLevel}");
-            LevelGame currentLevelGameSave =
+            GameObject currentLevelGameLoad = await AddressableLoader.LoadAsset<GameObject>($"Level_{currentLevel}"); 
+            currentLevelGameSave =
                 Instantiate(currentLevelGameLoad.GetComponent<LevelGame>(), this.transform.position,
                     Quaternion.identity);
             currentLevelGameSave.transform.localScale = Vector3.one;
             currentLevelGameSave.transform.position = Vector3.zero;
+            currentLevelGameSave.transform.SetParent(this.transform);
             cars = currentLevelGameSave.cars;
             movesAmount = currentLevelGameSave.moves;
             carAmount = cars.Count;
             coinsGet = carAmount * 10;
             SetupText();
-            Debug.Log(currentLevelGameLoad +  "_________________");
-            Debug.Log(currentLevelGameSave +  "++++++++++++++++");
         }
     }
 

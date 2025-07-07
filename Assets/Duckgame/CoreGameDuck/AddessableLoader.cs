@@ -60,7 +60,7 @@ public static class AddressableLoader
         {
              Debug.LogError($"Failed to load asset of type {typeof(T)} with key: {key}");
         }
-        Addressables.Release(handle);
+     //   Addressables.Release(handle);
         return asset;
     }
     
