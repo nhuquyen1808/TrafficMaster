@@ -88,12 +88,26 @@ namespace DevDuck
             SpinButtonAd.imageButton.raycastTarget = true;
             PanelGetPrize.SetActive(false);
             SetPrizeGeted(currentPrize, 1);
+           
             //gameObj1.GetComponent<RectTransform>().DOMove(gameObj2.GetComponent<RectTransform>().position, 1.2f).SetEase(Ease.InBack);
         }
 
         private void OnClickSpinButton()
         {
-            Spin();
+            float coin = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
+
+            if (coin > 300)
+            {
+                coin -= 300;
+                Debug.Log(coin + "  _________");
+                PlayerPrefs.SetFloat(PlayerPrefsManager.Coin, coin);
+                Observer.Notify(EventAction.EVENT_UPDATE_COIN, 300);
+                Spin();
+            }
+            else
+            {
+                Handheld.Vibrate();
+            }
         }
 
         private void Spin()

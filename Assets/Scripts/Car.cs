@@ -247,7 +247,6 @@ public class Car : MonoBehaviour
                 this.GetComponent<Animator>().Play("CarBreak");
                 DOVirtual.DelayedCall(1, (() => LogicUI.ins.ShowLosePopup(LOSETYPE.TRUNK_TANKER_HITTED)));
                 AudioManager.instance.PlaySound("CarCrash");
-                Debug.Log("?????");
             }
         }
         Pedestrians pedestrians = col.gameObject.GetComponent<Pedestrians>();

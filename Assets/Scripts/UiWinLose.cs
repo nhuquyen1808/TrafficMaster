@@ -44,7 +44,7 @@ namespace DevDuck
             claimAdButton.GetComponent<Image>().raycastTarget = false;
             /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
             PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
-            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet / 10, 10, LoadSceneGame);
+            effectGetCoin.GetReward(LogicGame.instance.coinsGet, 10, LoadSceneGame);
         }
         private void OnClickReplayButton()
         {
@@ -57,7 +57,7 @@ namespace DevDuck
             nextButton.GetComponent<Image>().raycastTarget = false;
             /*int currentLevel = PlayerPrefs.GetInt(PlayerPrefsManager.LevelUnlock);
         PlayerPrefs.SetInt(PlayerPrefsManager.LevelUnlock, currentLevel + 1);*/
-            effectGetCoin.RewardParentCoin(LogicGame.instance.coinsGet * 2 / 10, 10, LoadSceneGame);
+            effectGetCoin.GetReward(LogicGame.instance.coinsGet * 2, 10, LoadSceneGame);
         }
         public void ShowWinPanel()
         {

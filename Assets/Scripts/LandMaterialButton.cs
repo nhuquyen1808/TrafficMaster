@@ -42,10 +42,8 @@ namespace DevDuck
             else if (STATE == State.LOCKED)
             {
                 float coin = PlayerPrefs.GetFloat(PlayerPrefsManager.Coin);
-                Debug.Log("Coin: " + coin);
                 if (coin >= Price)
                 {
-                    Debug.Log("Buy material");
                     coin -= Price;
                     PlayerPrefs.SetFloat(PlayerPrefsManager.Coin, coin);
                     STATE = State.UNLOCKED;
