@@ -103,6 +103,7 @@ MonoBehaviour:
     m_Bits: 64
   boxCollider: {fileID: 7614277752935268805}
   isOnRunning: 0
+  isCheckRedLight: 0
 --- !u!114 &4189817301002303104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +170,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8119613, y: 1.6126013, z: 3.4344444}
-  m_Center: {x: -0.02387625, y: 0.7897167, z: -0.025960922}
+  m_Size: {x: 1.8119614, y: 1.6126013, z: 3.9388406}
+  m_Center: {x: -0.02387626, y: 0.7897166, z: 0.020570416}
 --- !u!54 &5646504428313704998
 Rigidbody:
   m_ObjectHideFlags: 0
