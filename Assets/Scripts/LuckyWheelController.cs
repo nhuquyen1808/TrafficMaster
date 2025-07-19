@@ -55,24 +55,24 @@ namespace DevDuck
 
         private void OnClickSpinAdButton()
         {
-            /*if (ManagerToast.instance.isHasInternetConnection == false)
+            if (ManagerToast.instance.isHasInternetConnection == false)
             {
                 ManagerToast.instance.Show();
                 return;
-            }*/
+            }
+            
             Debug.Log("Spin by watch ad");
             Spin();
         }
 
         private void OnClickGetButtonAd()
         {
-            /*
+            
             if (ManagerToast.instance.isHasInternetConnection == false)
             {
                 ManagerToast.instance.Show();
                 return;
             }
-            */
 
             AudioManager.instance.PlaySound("Coin");
             SpinButton.imageButton.raycastTarget = true;

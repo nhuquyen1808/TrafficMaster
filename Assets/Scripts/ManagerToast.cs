@@ -36,8 +36,8 @@ public class ManagerToast : MonoBehaviour
     {
         nShadow.gameObject.SetActive(false);
         toastObject.alpha = 1;
-        toastObject.transform.DOScale(0, 0.5f).From(1);
-        toastObject.DOFade(0, 0.5f).SetDelay(1).OnComplete(() => { toastObject.gameObject.SetActive(false); });
+        toastObject.transform.DOScale(0, 0.3f).From(1).SetEase(Ease.InBack);
+        toastObject.DOFade(0, 0.3f).OnComplete(() => { toastObject.gameObject.SetActive(false); });
     }
 
     public void CheckInternetConnection()
@@ -58,7 +58,7 @@ public class ManagerToast : MonoBehaviour
         nShadow.gameObject.SetActive(true);
         toastObject.gameObject.SetActive(true);
         toastObject.alpha = 0;
-        toastObject.DOFade(1, 0.5f);
-        toastObject.transform.DOScale(1, 0.5f).From(0);
+        toastObject.DOFade(1, 0.3f).SetEase(Ease.OutBack);
+        toastObject.transform.DOScale(1, 0.5f).From(0).SetEase(Ease.OutBack);
     }
 }
