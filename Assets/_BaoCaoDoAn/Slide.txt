@@ -1,0 +1,48 @@
+Slide 1 ;  Tổng quan 
+Em xin giới thiệu đề tài của mình là game “Traffic Master” – một trò chơi giải đố logic mô phỏng 
+tình trạng ùn tắc giao thông ở các thành phố lớn. Trò chơi không chỉ mang tính giải trí mà còn giúp 
+người chơi rèn luyện tư duy logic, khả năng phân tích và sắp xếp. Game có giao diện đơn giản, hiệu 
+ứng vui nhộn, phù hợp với nhiều độ tuổi. Ngoài ra, em cũng áp dụng nhiều kỹ thuật lập trình game
+ hiện đại để tối ưu trải nghiệm người dùng.
+Slide 2 : unity
+"Để phát triển game, em sử dụng Unity – một game engine rất phổ biến hiện nay.
+ Unity hỗ trợ tạo game 2D, 3D và các mô phỏng tương tác theo thời gian thực, 
+đặc biệt mạnh ở mảng game di động như Android và iOS. Unity có giao diện trực quan,
+ dễ sử dụng, dùng ngôn ngữ C#, phù hợp với cả người mới bắt đầu. Bên cạnh đó, 
+Unity có một hệ sinh thái rất đầy đủ từ xử lý vật lý, âm thanh, hình ảnh đến trí tuệ nhân tạo.
+ Em cũng tận dụng Asset Store để rút ngắn thời gian phát triển và tối ưu chi phí."
+
+Slide 3: 
+
+"Để lập trình cho game Unity, em sử dụng JetBrains Rider – một IDE rất mạnh của hãng JetBrains, chuyên hỗ trợ lập trình C#, .NET và Unity. Rider có khả năng tự động gợi ý mã,
+ phát hiện lỗi nhanh, refactor thông minh và tích hợp Git giúp làm việc nhóm hiệu quả. Công cụ này hỗ trợ đa nền tảng, hoạt động mượt mà và có giao diện rất thân thiện.
+ Ngoài ra, Rider còn tích hợp với ReSharper nên giúp cải thiện đáng kể chất lượng mã nguồn và tăng năng suất làm việc. Điểm cộng lớn là JetBrains có hỗ trợ phiên bản miễn phí ch
+o sinh viên hoặc dự án cá nhân
+
+"Để lập trình game, em sử dụng ngôn ngữ C#, là một ngôn ngữ hiện đại do Microsoft phát triển từ nền tảng C/C++. C# rất phù hợp với Unity, vì cú pháp rõ ràng,
+ đơn giản, lại hỗ trợ đầy đủ tính hướng đối tượng và các tính năng như xử lý lỗi, thu gom bộ nhớ tự động, rất thân thiện cho lập trình viên mới bắt đầu."
+
+"Bên cạnh đó, em sử dụng một số công nghệ hỗ trợ quan trọng trong Unity như:
+
+DOTween – để thực hiện các hiệu ứng chuyển động mượt mà cho các đối tượng,
+
+Safe Area – để đảm bảo UI không bị che khuất bởi notch hoặc góc bo màn hình,
+
+Addressable – giúp quản lý tài nguyên linh hoạt hơn thay vì gắn cố định trong code,
+
+Build Report – để theo dõi và tối ưu kích thước bản build cho thiết bị di động,
+
+và SRDebugger – cho phép gỡ lỗi trực tiếp khi game đang chạy mà không cần dùng Editor."
+
+"Trong game, người chơi sẽ điều phối giao thông trong số lượt giới hạn. Luật chơi khá rõ ràng: nếu vượt đèn đỏ hay đâm vào người đi bộ hoặc xe bồn thì sẽ bị phạt, thậm chí phải chơi lại.
+Game được thiết kế theo dạng thành phố lưới, với nhiều yếu tố mô phỏng như đèn tín hiệu và người đi bộ để tăng tính thực tế và chiến thuật.
+Người chơi có thể nhận vàng sau mỗi màn – số vàng dựa trên số xe trong bản đồ, và dùng vàng để mua booster hoặc skin hỗ trợ chơi.
+Mỗi xe có hướng di chuyển được chỉ định sẵn, nên người chơi phải tư duy nhanh để đưa ra hướng đi tối ưu, tránh va chạm và dùng lượt hợp lý."
+
+"Một trong những thách thức lớn nhất khi phát triển game là tối ưu hiệu năng, đặc biệt khi có nhiều đối tượng di chuyển như ô tô. Nếu mỗi ô tô dùng material riêng, game sẽ dễ bị giật lag do quá nhiều draw call.
+Vì vậy em đã áp dụng một số giải pháp như dùng GPU Instancing, bật Static Batching và tắt toàn bộ cast shadow để giảm tải GPU. 
+Những kỹ thuật này giúp game chạy mượt hơn, giữ ổn định FPS và đảm bảo trải nghiệm người chơi, nhất là trên thiết bị cấu hình thấp."
+
+"Trong quá trình phát triển game, em nhận thấy việc tạo và huỷ nhiều đối tượng như coin hay hiệu ứng gây lag rất rõ rệt, do bộ nhớ bị thu gom liên tục. Để xử lý, em đã dùng kỹ thuật Object Pooling — 
+nghĩa là thay vì tạo mới, em tái sử dụng đối tượng đã được khởi tạo trước đó. 
+Khi không dùng, object sẽ được ẩn đi và đưa lại vào danh sách chờ. Điều này giúp giảm hẳn lag, giữ bộ nhớ ổn định và tăng hiệu năng tổng thể, đặc biệt hiệu quả trên thiết bị cấu hình thấp."
